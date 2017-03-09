@@ -10,7 +10,9 @@ class App extends React.Component {
       fishes: {},
       order: {}
     }
+    this.addFish = this.addFish.bind(this);
   }
+
   addFish(fish) {
     const fishes = {
       ...this.state.fishes
@@ -29,7 +31,7 @@ class App extends React.Component {
           <Header tagline="Fresh Seafood Market" />
         </div>
         <Order />
-        <Inventory />
+        <Inventory addFish={ this.addFish } />
       </div>
     );
   }
