@@ -14,6 +14,7 @@ class App extends React.Component {
     }
     this.addFish = this.addFish.bind(this);
     this.loadSamples = this.loadSamples.bind(this);
+    this.addToOrder = this.addToOrder.bind(this);
   }
 
   addFish(fish) {
@@ -27,13 +28,24 @@ class App extends React.Component {
     });
   }
 
-  loadSamples() {
-    console.info({
-      sampleFishes
+  loadSamples() {}
+
+  addToOrder(key) {
+    console.log('addToOrder fired! with key=', key);
+    const order = {
+      ...this.state.order
+    };
+    order[key] = (order[key] + 1) || 1
+    this.setState({
+      order
     });
+  }
+
+  componentWillMount() {
     this.setState({
       fishes: sampleFishes
     });
+
   }
 
   render() {
@@ -42,13 +54,13 @@ class App extends React.Component {
         <div className="menu">
           <Header tagline="Fresh Seafood Market" />
           <ul className="list-of-fishes">
-            { Object
-                .keys(this.state.fishes)
-                .map(k => <Fish key={ k } data={ this.state.fishes[k] } />) }
+            {Object
+               .keys(this.state.fishes)
+               .map(k => <Fish key={k} index={k} addToOrder={this.addToOrder} details={this.state.fishes[k]} />)}
           </ul>
         </div>
         <Order />
-        <Inventory addFish={ this.addFish } loadSamples={ this.loadSamples } />
+        <Inventory addFish={this.addFish} loadSamples={this.loadSamples} />
       </div>
     );
   }
