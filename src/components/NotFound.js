@@ -5,8 +5,8 @@ class NotFound extends React.Component {
     return (
       <div>
         <h2>
-      			NotFound
-      			</h2>
+            NotFound
+            </h2>
         <div>
           <a href="/">Return back to home</a>
         </div>

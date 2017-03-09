@@ -1,5 +1,5 @@
 // This is just some sample data so you don't have to think of your own!
-module.exports = {
+const fishes = {
   fish1: {
     name: 'Pacific Halibut',
     image: 'http://i.istockimg.com/file_thumbview_approve/36248396/5/stock-photo-36248396-blackened-cajun-sea-bass.jpg',
@@ -37,7 +37,7 @@ module.exports = {
     image: 'http://i.istockimg.com/file_thumbview_approve/18294110/5/stock-photo-18294110-king-crab-legs.jpg',
     desc: 'Crack these open and enjoy them plain or with one of our cocktail sauces',
     price: 4234,
-    status: 'available'
+    status: 'unavailable'
   },
 
   fish6: {
@@ -72,3 +72,5 @@ module.exports = {
     status: 'available'
   }
 };
+
+export default fishes;
