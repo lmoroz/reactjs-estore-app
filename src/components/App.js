@@ -1,20 +1,25 @@
 import React from 'react';
+import base from '../base';
+
 import Header from './Header';
 import Inventory from './Inventory';
 import Order from './Order';
 import Fish from './Fish';
 import sampleFishes from '../sample-fishes.js';
 
+
 class App extends React.Component {
   constructor() {
     super();
+
+    this.addFish = this.addFish.bind(this);
+    this.loadSamples = this.loadSamples.bind(this);
+    this.addToOrder = this.addToOrder.bind(this);
+
     this.state = {
       fishes: {},
       order: {}
     }
-    this.addFish = this.addFish.bind(this);
-    this.loadSamples = this.loadSamples.bind(this);
-    this.addToOrder = this.addToOrder.bind(this);
   }
 
   addFish(fish) {
@@ -28,7 +33,11 @@ class App extends React.Component {
     });
   }
 
-  loadSamples() {}
+  loadSamples() {
+    this.setState({
+      fishes: sampleFishes
+    });
+  }
 
   addToOrder(key) {
     console.log('addToOrder fired! with key=', key);
@@ -42,10 +51,23 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    this.setState({
-      fishes: sampleFishes
+    this.ref = base.syncState(`${this.props.params.storeId}/fishes`, {
+      context: this,
+      state: 'fishes'
     });
+  }
 
+  componentWillUnMount() {
+    base.removeBinding(this.ref);
+  }
+
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('Something Changed');
+    console.log({
+      nextProps,
+      nextState
+    });
   }
 
   render() {
