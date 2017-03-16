@@ -55,6 +55,14 @@ class App extends React.Component {
       context: this,
       state: 'fishes'
     });
+
+    const localStorageRef = localStorage.getItem(`${this.props.params.storeId}/order`);
+
+    if (localStorageRef) {
+      this.setState({
+        order: JSON.parse(localStorageRef)
+      });
+    }
   }
 
   componentWillUnMount() {
@@ -63,11 +71,7 @@ class App extends React.Component {
 
 
   componentWillUpdate(nextProps, nextState) {
-    console.log('Something Changed');
-    console.log({
-      nextProps,
-      nextState
-    });
+    localStorage.setItem(`${this.props.params.storeId}/order`, JSON.stringify(nextState.order));
   }
 
   render() {
@@ -81,7 +85,7 @@ class App extends React.Component {
                .map(k => <Fish key={k} index={k} addToOrder={this.addToOrder} details={this.state.fishes[k]} />)}
           </ul>
         </div>
-        <Order fishes={this.state.fishes} order={this.state.order} />
+        <Order fishes={this.state.fishes} order={this.state.order} params={this.props.params} />
         <Inventory addFish={this.addFish} loadSamples={this.loadSamples} />
       </div>
     );
