@@ -24,7 +24,7 @@ class Order extends React.Component {
              else return (
                  <li className="order-item" key={fish_id}>
                    Sorry,
-                   {fishes[fish_id] ? fishes[fish_id].name : 'fish'} is no longer available!
+                   {fishes[fish_id] ? ` ${fishes[fish_id].name}` : ' fish'} is no longer available!
                  </li>
              )
            })}
