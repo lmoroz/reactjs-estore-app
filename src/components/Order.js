@@ -1,5 +1,6 @@
 import React from 'react';
 import { formatPrice } from '../helpers.js';
+import CSSTransitionGroup from 'react-addons-css-transition-group'
 
 class Order extends React.Component {
   render() {
@@ -8,8 +9,9 @@ class Order extends React.Component {
     return (
       <div className="order-wrap">
         <h2>Your order</h2>
-        <ul className="order">
+        <CSSTransitionGroup className="order" component="ul" transitionName="order" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
           {Object.keys(order).map(key => {
+             const count = order[key];
              const fishAvail = fishes[key] && fishes[key].status === 'available';
              const removeButton = <button onClick={(e) => this.props.removeFromOrder(key)}>×</button>
              if (fishAvail) {
@@ -17,9 +19,15 @@ class Order extends React.Component {
                total += item_subtotal;
                return (
                  <li className="order-item" key={key}>
-                   <span className="order-item-name">{order[key]}lbs of {fishes[key].name}</span>
-                   <span className="order-item-subtotal">{formatPrice(item_subtotal)}</span>
+                   <span>
+                                                                                             <CSSTransitionGroup className="count" component="span" transitionName="count" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
+                                                                                              <span key={count}>{count}</span>
+                   </CSSTransitionGroup>
+                   lbs of
+                   {fishes[key].name}
                    {removeButton}
+                   </span>
+                   <span className="order-item-subtotal">{formatPrice(item_subtotal)}</span>
                  </li>
                )
              }
@@ -35,7 +43,7 @@ class Order extends React.Component {
             <strong>Total:</strong>
             <span className="order-total-num">{formatPrice(total)}</span>
           </li>
-        </ul>
+        </CSSTransitionGroup>
       </div>
     );
   }
