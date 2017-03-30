@@ -17,6 +17,7 @@ class App extends React.Component {
     this.removeFish = this.removeFish.bind(this);
     this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
+    this.removeFromOrder = this.removeFromOrder.bind(this);
 
     this.state = {
       fishes: {},
@@ -50,7 +51,7 @@ class App extends React.Component {
       ...this.state.fishes
     };
     // delete fishes[key];
-    fishes[key] = null;
+    fishes[key] = null; //due to Firebase
     this.setState({
       fishes
     });
@@ -67,6 +68,16 @@ class App extends React.Component {
       ...this.state.order
     };
     order[key] = (order[key] + 1) || 1
+    this.setState({
+      order
+    });
+  }
+
+  removeFromOrder(key) {
+    const order = {
+      ...this.state.order
+    };
+    delete order[key];
     this.setState({
       order
     });
@@ -107,7 +118,7 @@ class App extends React.Component {
                .map(k => <Fish key={k} index={k} addToOrder={this.addToOrder} details={this.state.fishes[k]} />)}
           </ul>
         </div>
-        <Order fishes={this.state.fishes} order={this.state.order} params={this.props.params} />
+        <Order fishes={this.state.fishes} order={this.state.order} params={this.props.params} removeFromOrder={this.removeFromOrder} />
         <Inventory addFish={this.addFish} updateFish={this.updateFish} removeFish={this.removeFish} loadSamples={this.loadSamples} fishes={this.state.fishes}
         />
       </div>

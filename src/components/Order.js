@@ -9,22 +9,25 @@ class Order extends React.Component {
       <div className="order-wrap">
         <h2>Your order</h2>
         <ul className="order">
-          {Object.keys(order).map(fish_id => {
-             const fishAvail = fishes[fish_id] && fishes[fish_id].status === 'available';
+          {Object.keys(order).map(key => {
+             const fishAvail = fishes[key] && fishes[key].status === 'available';
+             const removeButton = <button onClick={(e) => this.props.removeFromOrder(key)}>×</button>
              if (fishAvail) {
-               const item_subtotal = (fishes[fish_id].price || 0) * (order[fish_id] || 0);
+               const item_subtotal = (fishes[key].price || 0) * (order[key] || 0);
                total += item_subtotal;
                return (
-                 <li className="order-item" key={fish_id}>
-                   <span className="order-item-name">{order[fish_id]}lbs of {fishes[fish_id].name}</span>
+                 <li className="order-item" key={key}>
+                   <span className="order-item-name">{order[key]}lbs of {fishes[key].name}</span>
                    <span className="order-item-subtotal">{formatPrice(item_subtotal)}</span>
+                   {removeButton}
                  </li>
                )
              }
              else return (
-                 <li className="order-item" key={fish_id}>
+                 <li className="order-item" key={key}>
                    Sorry,
-                   {fishes[fish_id] ? ` ${fishes[fish_id].name}` : ' fish'} is no longer available!
+                   {fishes[key] ? ` ${fishes[key].name}` : ' fish'} is no longer available!
+                   {removeButton}
                  </li>
              )
            })}
