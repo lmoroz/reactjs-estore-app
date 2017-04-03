@@ -7,7 +7,7 @@ import App from './components/App';
 import NotFound from './components/NotFound';
 import StorePicker from './components/StorePicker';
 
-const repo = (window.location.pathname.match(/github/)) ? `/${window.location.pathname.split('/')[1]}` : '';
+const repo = (window.location.pathname.match(/\/.+\//)) ? `/${window.location.pathname.split('/')[1]}` : '';
 const StorePickerPath = `${repo}/`;
 const storePath = `${repo}/store/:storeId`;
 console.log({
