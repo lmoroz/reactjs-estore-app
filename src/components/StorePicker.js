@@ -8,9 +8,8 @@ class StorePicker extends React.Component {
   // }
   goToStore(event) {
     event.preventDefault();
-    const repo = (window.location.hostname.match(/github/)) ? `/${window.location.pathname.split('/')[1]}` : '';
     const storeId = this.storeInput.value;
-    this.context.router.transitionTo(`${repo}/store/${storeId}`);
+    this.context.router.transitionTo(`/store/${storeId}`);
   }
   render() {
 
