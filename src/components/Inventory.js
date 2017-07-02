@@ -6,12 +6,8 @@ class Inventory extends React.Component {
 
   constructor() {
     super();
-    this.renderInventory = this.renderInventory.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.renderLogin = this.renderLogin.bind(this);
-    this.authenticate = this.authenticate.bind(this);
-    this.authenticate = this.authenticate.bind(this);
-    this.logout = this.logout.bind(this);
+
+
     this.state = {
       uid: null,
       owner: null
@@ -30,7 +26,7 @@ class Inventory extends React.Component {
     );
   }
 
-  handleChange(e, key) {
+  handleChange = (e, key) => {
     const fish = this.props.fishes[key];
     const updatedFish = {
       ...fish,
@@ -40,11 +36,11 @@ class Inventory extends React.Component {
   }
 
 
-  authenticate(provider) {
+  authenticate = (provider) => {
     base.authWithOAuthPopup(provider, this.authHandler);
   }
 
-  logout() {
+  logout = () => {
     base.unauth();
     this.setState({
       uid: null
@@ -74,7 +70,7 @@ class Inventory extends React.Component {
     })
   }
 
-  renderLogin() {
+  renderLogin = () => {
     return (
       <nav className="login">
         <h2>Inventory</h2>
@@ -86,7 +82,7 @@ class Inventory extends React.Component {
     )
   }
 
-  renderInventory(key) {
+  renderInventory = (key) => {
     const fish = this.props.fishes[key];
 
     return (
@@ -135,17 +131,17 @@ class Inventory extends React.Component {
       </div>
     );
   }
+
+  static propTypes = {
+    fishes: React.PropTypes.object.isRequired,
+    addFish: React.PropTypes.func.isRequired,
+    updateFish: React.PropTypes.func.isRequired,
+    removeFish: React.PropTypes.func.isRequired,
+    loadSamples: React.PropTypes.func.isRequired,
+    storeId: React.PropTypes.string
+  }
+
 }
 
-
-
-Inventory.propTypes = {
-  fishes: React.PropTypes.object.isRequired,
-  addFish: React.PropTypes.func.isRequired,
-  updateFish: React.PropTypes.func.isRequired,
-  removeFish: React.PropTypes.func.isRequired,
-  loadSamples: React.PropTypes.func.isRequired,
-  storeId: React.PropTypes.string
-}
 
 export default Inventory;

@@ -9,23 +9,13 @@ import sampleFishes from '../sample-fishes.js';
 
 
 class App extends React.Component {
-  constructor() {
-    super();
 
-    this.addFish = this.addFish.bind(this);
-    this.updateFish = this.updateFish.bind(this);
-    this.removeFish = this.removeFish.bind(this);
-    this.loadSamples = this.loadSamples.bind(this);
-    this.addToOrder = this.addToOrder.bind(this);
-    this.removeFromOrder = this.removeFromOrder.bind(this);
-
-    this.state = {
-      fishes: {},
-      order: {}
-    }
+  state = {
+    fishes: {},
+    order: {}
   }
 
-  addFish(fish) {
+  addFish = (fish) => {
     const fishes = {
       ...this.state.fishes
     };
@@ -36,7 +26,7 @@ class App extends React.Component {
     });
   }
 
-  updateFish(key, updatedFish) {
+  updateFish = (key, updatedFish) => {
     const fishes = {
       ...this.state.fishes
     };
@@ -46,7 +36,7 @@ class App extends React.Component {
     });
   }
 
-  removeFish(key) {
+  removeFish = (key) => {
     const fishes = {
       ...this.state.fishes
     };
@@ -57,13 +47,13 @@ class App extends React.Component {
     });
   }
 
-  loadSamples() {
+  loadSamples = () => {
     this.setState({
       fishes: sampleFishes
     });
   }
 
-  addToOrder(key) {
+  addToOrder = (key) => {
     const order = {
       ...this.state.order
     };
@@ -73,7 +63,7 @@ class App extends React.Component {
     });
   }
 
-  removeFromOrder(key) {
+  removeFromOrder = (key) => {
     const order = {
       ...this.state.order
     };
@@ -124,12 +114,11 @@ class App extends React.Component {
       </div>
     );
   }
+
+  static propTypes = {
+    params: React.PropTypes.object.isRequired
+  }
 }
 
-
-
-App.propTypes = {
-  params: React.PropTypes.object.isRequired
-}
 
 export default App;

@@ -20,8 +20,8 @@ class Order extends React.Component {
                return (
                  <li className="order-item" key={key}>
                    <span>
-                                                                                                                                  <CSSTransitionGroup className="count" component="span" transitionName="count" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
-                                                                                                                                   <span key={count}>{count}</span>
+                                                                                                                                                                                                                                                                                      <CSSTransitionGroup className="count" component="span" transitionName="count" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
+                                                                                                                                                                                                                                                                                       <span key={count}>{count}</span>
                    </CSSTransitionGroup>
                    lbs of
                    {fishes[key].name}
@@ -47,13 +47,14 @@ class Order extends React.Component {
       </div>
     );
   }
+
+  static propTypes = {
+    fishes: React.PropTypes.object.isRequired,
+    order: React.PropTypes.object.isRequired,
+    removeFromOrder: React.PropTypes.func.isRequired,
+  }
+
 }
 
-
-Order.propTypes = {
-  fishes: React.PropTypes.object.isRequired,
-  order: React.PropTypes.object.isRequired,
-  removeFromOrder: React.PropTypes.func.isRequired,
-}
 
 export default Order;
